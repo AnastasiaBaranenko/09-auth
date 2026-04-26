@@ -1,5 +1,6 @@
 import css from './Header.module.css'
 import Link from 'next/link';
+import  AuthNavigation from '../AuthNavigation/AuthNavigation';
 
 export default function Header(){
 
@@ -11,20 +12,13 @@ export default function Header(){
   <nav aria-label="Main Navigation">
     <ul className={css.navigation}>
       <li>
-        <Link href="/notes/filter/all">Home</Link>
+        <Link href="/profile">Home</Link>
       </li>
       <li>
-        <Link href="/profile">Notes</Link>
+        <Link href="/notes/filter/all">Notes</Link>
       </li> 
-      {/* <li>
-        <Link href="/logout">Notes</Link>
-      </li> */}
-       <li>
-        <Link href="/sign-in">Notes</Link>
-      </li>
-      <li> 
-        <Link href="/sign-up">Home</Link>
-      </li>
+       
+       <AuthNavigation /> 
     </ul>
   </nav>
 </header>
