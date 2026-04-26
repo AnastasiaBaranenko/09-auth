@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { useId } from "react";
 import { useMutation } from '@tanstack/react-query';
 import {useQueryClient} from '@tanstack/react-query';
-import type { Note } from '@/lib/api/clientApi';
+import type { Note } from '@/types/note';
 import { createNote } from '@/lib/api/clientApi';
 import { useState } from 'react';
 import {useNoteStore} from '@/lib/store/noteStore';
