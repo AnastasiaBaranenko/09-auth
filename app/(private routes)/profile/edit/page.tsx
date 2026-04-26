@@ -8,8 +8,6 @@ import {useAuthStore} from '@/lib/store/authStore';
 import {getMe} from '@/lib/api/clientApi';
 import {updateMe} from '@/lib/api/clientApi';
 
- const urlAvatar = 'https://ac.goit.global/fullstack/react/default-avatar.jpg';
-
 
 export default function EditeProfile() {
   const { user, setUser } = useAuthStore();
@@ -17,6 +15,9 @@ export default function EditeProfile() {
 
   const router = useRouter();
   
+  
+ const urlAvatar = 'https://ac.goit.global/fullstack/react/default-avatar.jpg';
+
   const avatarSrc = user?.avatar || urlAvatar;
 
   useEffect(() => {
