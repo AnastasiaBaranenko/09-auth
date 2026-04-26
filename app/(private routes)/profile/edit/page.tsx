@@ -14,9 +14,11 @@ import {updateMe} from '@/lib/api/clientApi';
 export default function EditeProfile() {
   const { user, setUser } = useAuthStore();
   const [username, setUserName] = useState('');
-  const [email, setEmail] = useState('');
+
   const router = useRouter();
   
+  const avatarSrc = user?.avatar || urlAvatar;
+
   useEffect(() => {
    const fetchData = async () => {
       if(user){
@@ -60,7 +62,7 @@ return(
   <div className={css.profileCard}>
     <h1 className={css.formTitle}>Edit Profile</h1>
 
-    <Image src={urlAvatar}
+    <Image src={avatarSrc}
       alt="User Avatar"
       width={120}
       height={120}
@@ -79,7 +81,7 @@ return(
         />
       </div>
 
-      <p>Email: {email}</p>
+      <p>Email: {user?.email}</p>
 
       <div className={css.actions}>
         <button type="submit" className={css.saveButton}>

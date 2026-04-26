@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getMe } from '@/lib/api/serverApi';
 
-
 export const metadata = {
   title: 'Edit Profile',
   description: 'Update your user profile',
@@ -28,8 +27,11 @@ export const metadata = {
 
 
 export default async function Profile(){
-
   const data = await getMe();
+  
+const urlAvatar = 'https://ac.goit.global/fullstack/react/default-avatar.jpg'
+
+const avatarUrl = data?.avatar || urlAvatar;
   
 return(
 <main className={css.mainContent}>
@@ -42,7 +44,7 @@ return(
 	   </div>
      <div className={css.avatarWrapper}>
       <Image
-        src={user.avatar}
+        src={avatarUrl}
         alt="User Avatar"
         width={120}
         height={120}
