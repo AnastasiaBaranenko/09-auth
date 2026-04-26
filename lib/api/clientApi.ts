@@ -74,9 +74,9 @@ export type CheckSessionRequest = {
   success: boolean;
 };
 
-export async function checkSession(): Promise<boolean> {
+export async function checkSession(){
   const response = await nextServer.get<CheckSessionRequest>('/auth/session');
-  return response.data.success;
+  return response;
 };
 
 export async function getMe(){
