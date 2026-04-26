@@ -4,47 +4,56 @@ import css from './EditProfilePage.module.css';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-
+import {useAuthStore} from '@/lib/store/authStore';
 import {getMe} from '@/lib/api/clientApi';
 import {updateMe} from '@/lib/api/clientApi';
+
  const urlAvatar = 'https://ac.goit.global/fullstack/react/default-avatar.jpg';
 
-export default function EditeProfile(
-  ) {
+
+export default function EditeProfile() {
+  const { user, setUser } = useAuthStore();
   const [username, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const router = useRouter();
   
   useEffect(() => {
-    getMe().then((user) => {
+   const fetchData = async () => {
       if(user){
       setUserName(user.username || '');
-      setEmail(user.email || '');
-      }
-    });
-  }, []);
+      }else {
   
+    try {
+     const userData = await getMe()
+     if (userData) {
+            setUser(userData);
+            setUserName(userData.username || '');
+          }
+        } catch (error) {
+          console.error("Service error", error);
+        }
+      }
+    };
+fetchData();
+  }, [user, setUser]);
 
-  const handleSaveUser = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSaveUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!username.trim()) return;
 
     try {
-
-        await updateMe({
-          username,
-  
-        });
-        router.push('/profile');
-        }
-    catch (error) {
+      const updatedUser = await updateMe({ username });
+      setUser(updatedUser);
+      router.push('/profile');
+    } catch (error) {
       console.error("Failed to update profile", error);
     }
   };
 
   const handleCancel = () => {
     router.back();
-  }
+  };
+  
 return(
 
 <main className={css.mainContent}>
@@ -70,7 +79,7 @@ return(
         />
       </div>
 
-      <p>Email: user_email@example.com</p>
+      <p>Email: {email}</p>
 
       <div className={css.actions}>
         <button type="submit" className={css.saveButton}>

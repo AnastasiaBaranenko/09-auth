@@ -3,7 +3,7 @@ import { cookies } from 'next/headers';
 import { parse } from 'cookie';
 import { checkSession } from './lib/api/serverApi';
 
-const privateRoutes = ['/profile'];
+const privateRoutes = ['/profile', '/notes'];
 const publicRoutes = ['/sign-in', '/sign-up'];
 export async function proxy(request: NextRequest) {
 
@@ -25,9 +25,10 @@ export async function proxy(request: NextRequest) {
           for (const cookieStr of cookieArray) {
             const parsed = parse(cookieStr);
             const options = {
-              expires: parsed.Expires ? new Date(parsed.Expires) : undefined,
-              path: parsed.Path,
-              maxAge: Number(parsed['Max-Age']),
+              ...(parsed.Expires && {expires: new Date(parsed.Expires)}),
+              ...(parsed.Path && { path: parsed.Path}),
+              ...(parsed['Max-Age'] && {maxAge: Number(parsed['Max-Age'])}),
+
             };
             if (parsed.accessToken) cookieStore.set('accessToken', parsed.accessToken, options);
             if (parsed.refreshToken) cookieStore.set('refreshToken', parsed.refreshToken, options);
@@ -69,5 +70,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-     matcher: ['/profile/:path*', '/sign-in', '/sign-up'],
+     matcher: ['/profile/:path*', '/notes/:path*', '/sign-in', '/sign-up'],
 };

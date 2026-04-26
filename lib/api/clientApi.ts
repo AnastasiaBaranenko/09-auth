@@ -45,9 +45,9 @@ const response = await nextServer.get<Notes>('/notes', {
      }
 
      export type RegisterRequest = {
-    username: string,
+    password: string,
     email: string,
-    avatar: string,
+    
 }
 
 export async function register(data: RegisterRequest){
@@ -66,7 +66,7 @@ const response = await nextServer.post<User>('/auth/login', data );
 }
 
 export async function logout(){
-const response = await nextServer.post<User>('/auth/logout' );
+const response = await nextServer.post<void>('/auth/logout' );
   return response.data;
 }
 
@@ -74,7 +74,7 @@ export type CheckSessionRequest = {
   success: boolean;
 };
 
-export async function checkSession() {
+export async function checkSession(): Promise<boolean> {
   const response = await nextServer.get<CheckSessionRequest>('/auth/session');
   return response.data.success;
 };
@@ -86,8 +86,7 @@ export async function getMe(){
 
 export type UpdateUserRequest = {
   username: string,
-  email?: string,
-  avatar?: string,
+
 }
 
 export async function updateMe(update: UpdateUserRequest){

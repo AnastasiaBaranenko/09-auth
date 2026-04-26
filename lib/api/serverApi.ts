@@ -46,13 +46,13 @@ export async function getMe(){
   return data;
 }
 
-export async function checkSession(){
+export async function checkSession(): Promise<boolean> {
      const cookieStore = await cookies();
   const response = await nextServer.get<CheckSessionRequest>('/auth/session',  {
     headers: {  Cookie: cookieStore.toString(),
     },
   });
-   return response;
+   return response.data.success;
 }
 
 
