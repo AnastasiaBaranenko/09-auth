@@ -78,7 +78,7 @@ const response = await nextServer.post<User>('/auth/logout' );
   return response.data;
 }
 
-type CheckSessionRequest = {
+export type CheckSessionRequest = {
   success: boolean;
 };
 

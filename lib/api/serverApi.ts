@@ -2,6 +2,7 @@ import { cookies } from 'next/headers';
 import {nextServer} from './api';
 import { User } from '@/types/users';
 import {Notes, Note} from './clientApi';
+import type {CheckSessionRequest} from '../api/clientApi';
 
 export async function fetchNotes(search: string, page: number, tag?: string): Promise<Notes> {
   const cookieStore = await cookies();
@@ -46,7 +47,7 @@ export async function getMe(){
 
 export async function checkSession(){
      const cookieStore = await cookies();
-  const response = await nextServer.get('/auth/session',  {
+  const response = await nextServer.get<CheckSessionRequest>('/auth/session',  {
     headers: {  Cookie: cookieStore.toString(),
     },
   });

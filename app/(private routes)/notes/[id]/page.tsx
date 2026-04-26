@@ -19,7 +19,7 @@ return{
   openGraph:{
    title: `Note ${note.title}`,
    description:`Note detail: ${note.content}`,
-      url: `https://08-zustand-steel-chi.vercel.app/${id}`,
+      url: `https://09-auth-eight-murex.vercel.app/${id}`,
 
     images: [
         {

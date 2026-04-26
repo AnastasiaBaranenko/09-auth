@@ -19,7 +19,7 @@ export async function generateMetadata({ params }:NotesPageProps):Promise<Metada
   openGraph:{
     title: `Note: ${formattedTag}`,
     description: `Tag note: ${formattedTag}`,
-    url: `https://08-zustand-steel-chi.vercel.app/${formattedTag}`,
+    url: `https://09-auth-eight-murex.vercel.app/${formattedTag}`,
     images: [
       {
            url: 'https://ac.goit.global/fullstack/react/og-meta.jpg',
