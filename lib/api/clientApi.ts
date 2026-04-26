@@ -76,7 +76,7 @@ export type CheckSessionRequest = {
 
 export async function checkSession(){
   const response = await nextServer.get<CheckSessionRequest>('/auth/session');
-  return response;
+  return response.data.success;
 };
 
 export async function getMe(){

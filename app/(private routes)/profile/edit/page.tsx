@@ -11,52 +11,52 @@ import {updateMe} from '@/lib/api/clientApi';
 
 export default function EditeProfile() {
   const { user, setUser } = useAuthStore();
-  const [username, setUserName] = useState('');
+  const [username, setUserName] = useState('')
+const router = useRouter();
 
-  const router = useRouter();
-  
   
  const urlAvatar = 'https://ac.goit.global/fullstack/react/default-avatar.jpg';
+ const avatarSrc = user?.avatar || urlAvatar;
 
-  const avatarSrc = user?.avatar || urlAvatar;
-
-  useEffect(() => {
-   const fetchData = async () => {
-      if(user){
-      setUserName(user.username || '');
-      }else {
-  
-    try {
-     const userData = await getMe()
-     if (userData) {
-            setUser(userData);
-            setUserName(userData.username || '');
-          }
-        } catch (error) {
-          console.error("Service error", error);
+ useEffect(() => {
+      const fetchData = async () => {
+        try {
+          if (!user) {
+          const userData = await getMe();
+          if (userData) {
+          setUser(userData);
+          setUserName(userData.username || '');
         }
       }
-    };
-fetchData();
-  }, [user, setUser]);
+      else if (user && username === '') {
+        setUserName(user.username || '');
+      }
+    } catch (error) {
+      console.error('Error loading profile', error);
+    }
+  };
+  fetchData()
+  }, [user, setUser, username]);
 
-    const handleSaveUser = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSaveUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!username.trim()) return;
 
     try {
-      const updatedUser = await updateMe({ username });
-      setUser(updatedUser);
-      router.push('/profile');
+      const updatedUser = await updateMe({ username: username.trim() });
+      if (updatedUser) {
+        setUser(updatedUser);
+        router.push('/profile');
+        }
     } catch (error) {
-      console.error("Failed to update profile", error);
+      console.error('Failed to update profile', error);
     }
   };
-
-  const handleCancel = () => {
-    router.back();
-  };
   
+  const handleCancel = () => {
+    router.push('/profile');
+  };
+
 return(
 
 <main className={css.mainContent}>

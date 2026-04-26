@@ -3,7 +3,7 @@ import {nextServer} from './api';
 import { User } from '@/types/user';
 import {Notes} from './clientApi';
 import type {Note} from '@/types/note';
-import type {CheckSessionRequest} from '../api/clientApi';
+
 
 export async function fetchNotes(search: string, page: number, tag?: string): Promise<Notes> {
   const cookieStore = await cookies();
@@ -46,13 +46,13 @@ export async function getMe(){
   return data;
 }
 
-export async function checkSession(): Promise<boolean> {
+export async function checkSession(){
      const cookieStore = await cookies();
-  const response = await nextServer.get<CheckSessionRequest>('/auth/session',  {
+  const response = await nextServer.get('/auth/session',  {
     headers: {  Cookie: cookieStore.toString(),
     },
   });
-   return response.data.success;
+   return response;
 }
 
 
