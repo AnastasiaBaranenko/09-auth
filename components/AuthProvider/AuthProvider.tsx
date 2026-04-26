@@ -18,7 +18,8 @@ export default function AuthProvider ({ children }: AuthProviderProps){
       if (isAuthenticated) {
          const user = await getMe();
         if (user) setUser(user);
-      } else {        clearIsAuthenticated();
+      } else { 
+      clearIsAuthenticated();
       }
     };
     fetchUser();
@@ -26,3 +27,4 @@ export default function AuthProvider ({ children }: AuthProviderProps){
 
   return children;
 };
+
