@@ -1,7 +1,8 @@
 import { cookies } from 'next/headers';
 import {nextServer} from './api';
-import { User } from '@/types/users';
-import {Notes, Note} from './clientApi';
+import { User } from '@/types/user';
+import {Notes} from './clientApi';
+import type {Note} from '@/types/note';
 import type {CheckSessionRequest} from '../api/clientApi';
 
 export async function fetchNotes(search: string, page: number, tag?: string): Promise<Notes> {
