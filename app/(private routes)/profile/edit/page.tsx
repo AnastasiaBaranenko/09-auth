@@ -9,7 +9,7 @@ import {getMe} from '@/lib/api/clientApi';
 import {updateMe} from '@/lib/api/clientApi';
 
 
-export default function EditeProfile() {
+export default function EditProfile() {
   const { user, setUser } = useAuthStore();
   const [username, setUserName] = useState('')
 const router = useRouter();
@@ -46,7 +46,7 @@ const router = useRouter();
       const updatedUser = await updateMe({ username: username.trim() });
       if (updatedUser) {
         setUser(updatedUser);
-        router.push('/profile');
+        router.back();
         }
     } catch (error) {
       console.error('Failed to update profile', error);
@@ -54,7 +54,7 @@ const router = useRouter();
   };
   
   const handleCancel = () => {
-    router.push('/profile');
+    router.back();
   };
 
 return(
@@ -72,7 +72,7 @@ return(
 
     <form onSubmit={handleSaveUser} className={css.profileInfo}>
       <div className={css.usernameWrapper}>
-        <label htmlFor="username">Username:{username}</label>
+        <label htmlFor="username">Username:</label>
         <input id="username"
           type="text"
           className={css.input}

@@ -66,8 +66,7 @@ const response = await nextServer.post<User>('/auth/login', data );
 }
 
 export async function logout(){
-const response = await nextServer.post<void>('/auth/logout' );
-  return response.data;
+ await nextServer.post<void>('/auth/logout' );
 }
 
 export type CheckSessionRequest = {

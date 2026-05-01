@@ -1,10 +1,10 @@
 import css from './ProfilePage.module.css';
 import Image from 'next/image';
-
 import Link from 'next/link';
 import { getMe } from '@/lib/api/serverApi';
+import { Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Edit Profile',
   description: 'Update your user profile',
  
