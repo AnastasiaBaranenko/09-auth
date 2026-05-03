@@ -4,7 +4,6 @@ import { User } from '@/types/user';
 import {Notes} from './clientApi';
 import type {Note} from '@/types/note';
 
-
 export async function fetchNotes(search: string, page: number, tag?: string): Promise<Notes> {
   const cookieStore = await cookies();
   const queryParams: Record<string, string | number> = {
