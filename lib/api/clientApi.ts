@@ -2,6 +2,7 @@
 import {nextServer} from '../api/api';
 import type {User} from '@/types/user';
 import type {Note}  from '@/types/note'
+import { log } from 'console';
 
 export interface NoteValues{
     title: string,

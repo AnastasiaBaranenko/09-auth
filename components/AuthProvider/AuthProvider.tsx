@@ -17,10 +17,14 @@ export default function AuthProvider ({ children }: AuthProviderProps){
       const isAuthenticated = await checkSession();
       if (isAuthenticated) {
          const user = await getMe();
-        if (user) setUser(user);
+        if (user) {
+          setUser(user);
       } else { 
       clearIsAuthenticated();
       }
+      } else { 
+          clearIsAuthenticated();
+        }
     };
     fetchUser();
   }, [setUser, clearIsAuthenticated]);

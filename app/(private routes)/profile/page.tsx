@@ -5,13 +5,13 @@ import { getMe } from '@/lib/api/serverApi';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Edit Profile',
-  description: 'Update your user profile',
+  title: 'Profile',
+  description: 'Your user profile',
  
 
   openGraph: {
-     title: 'Edit Profile',
-  description: 'Update your user profile',
+     title: 'Profile',
+  description: 'Your user profile',
   url: "https://09-auth-eight-murex.vercel.app/",
 
     images: [
