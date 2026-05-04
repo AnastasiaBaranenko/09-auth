@@ -7,6 +7,6 @@ export const nextServer = axios.create({
   withCredentials: true,
   });
 
-  console.log("API:", process.env.NEXT_PUBLIC_API_URL + '/api')
+
 
   
