@@ -1,8 +1,6 @@
-
 import {nextServer} from '../api/api';
 import type {User} from '@/types/user';
-import type {Note}  from '@/types/note'
-import { log } from 'console';
+import type {Note}  from '@/types/note';
 
 export interface NoteValues{
     title: string,
